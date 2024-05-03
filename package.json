@@ -1,0 +1,22 @@
+{
+  "name": "unitynet",
+  "version": "1.0.0",
+  "description": "School project, will build a  blockchain. Maybe on day it will solve the trilemma.",
+  "main": "server.mjs",
+  "start": "set NODE_ENV=production&& node server",
+  "scripts": {
+    "dev": "nodemon server",
+    "start": "node server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
