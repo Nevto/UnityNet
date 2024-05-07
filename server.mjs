@@ -4,17 +4,23 @@ import unityRouter from './routes/unityRouter.mjs'
 import logMyData from './middleware/logger.mjs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import errorHandler from './middleware/errorHandler.mjs'
 
 dotenv.config({ path: './config/config.env' })
 const app = express()
 
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+
+global.__appdir = dirname
+
 if (process.env.NODE_ENV === 'development') {
     app.use(logMyData)
 }
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
-console.log(dirname);
-global.__appdir = dirname
+
+app.use(errorHandler)
+
+
 
 
 const PORT = process.env.PORT || 5000
