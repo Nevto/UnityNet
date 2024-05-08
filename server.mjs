@@ -17,7 +17,10 @@ global.__appdir = dirname
 if (process.env.NODE_ENV === 'development') {
     app.use(logMyData)
 }
+app.all('*', (req, res, next) => {
+    next(new Error(`Can't find ${req.originalUrl} on this server!`))
 
+})
 
 
 
