@@ -7,14 +7,15 @@ export default class UnityNet {
         this.chain = []
         this.friendNodes = []
         this.nodeUrl = process.env.NODE_URL
+
+        this.createBlock(Date.now(), 0, '0', '0', [])
     }
 
 
-    createBlock(timestamp, blockIndex, prevHash, hash, data) {
+    createBlock(timestamp, prevHash, hash, data) {
         const block = new Block(
             timestamp,
             this.chain.length + 1,
-            blockIndex,
             prevHash,
             hash,
             data
@@ -25,14 +26,14 @@ export default class UnityNet {
     }
 
     getLastBlock() {
-        return this.chain[this.chain.length - 1]
+        return this.chain.at(-1)
     }
 
-    hashBlock(timestamp, prevHash, data) {
-        const stringToHash = timestamp.toString() + prevHash + JSON.stringify(data)
-        const hash = createHash(stringToHash)
+    hashBlock(timestamp, prevHash, currBlockData) {
+        const stringToHash = timestamp.toString() + prevHash + JSON.stringify(currBlockData)
+        const shaHash = createHash(stringToHash)
 
-        return hash
+        return shaHash
     }
 
     validateChain(UnityNet) {

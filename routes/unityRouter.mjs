@@ -8,6 +8,5 @@ router.route('/mine').post(createBlock)
 router.route('/sync').get(synchronizeChain)
 router.route('/update').post(updateChain)
 
-// router.route('/mine').post(createBlock)
 
 export default router

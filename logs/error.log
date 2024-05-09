@@ -1,1 +1,3 @@
 req: GET /unit Thu May 09 2024 08:30:34 GMT+0200 (centraleuropeisk sommartid) Can't find /unit on this server!
+req: POST /api/v1/blockchain/mine Thu May 09 2024 08:45:10 GMT+0200 (centraleuropeisk sommartid) Can't find /api/v1/blockchain/mine on this server!
+req: GET /api/v1/blockchain Thu May 09 2024 09:24:48 GMT+0200 (centraleuropeisk sommartid) Can't find /api/v1/blockchain on this server!

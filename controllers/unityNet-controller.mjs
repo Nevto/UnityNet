@@ -6,12 +6,12 @@ export const loadUnityNet = (req, res, next) => {
 
 export const createBlock = async (req, res, next) => {
     const lastBlock = unityNet.getLastBlock()
-    const data = req.body.data
+    const data = req.body
     const timestamp = Date.now()
 
-    const hash = unityNet.hashBlock(timestamp, lastBlock.hash, data)
+    const currBlockHash = unityNet.hashBlock(timestamp, lastBlock.hash, data)
 
-    const block = unityNet.createBlock(timestamp, lastBlock.hash, hash, data)
+    const block = unityNet.createBlock(timestamp, lastBlock.hash, currBlockHash, data)
 
     res.status(201).json({ success: true, data: block })
 }
@@ -35,7 +35,7 @@ export const synchronizeChain = (req, res, next) => {
     let maxLength = currentLength
     let longestChain = null
 
-    unityNet.friendNoders.forEach(async (friend) => {
+    unityNet.friendNodes.forEach(async (friend) => {
         const response = await fetch(`${friend}/api/v1/unityNet`)
         if (response.ok) {
             const result = await response.json()
