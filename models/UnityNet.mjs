@@ -5,7 +5,7 @@ import Block from "./Block.mjs"
 export default class UnityNet {
     constructor() {
         this.chain = []
-        this.noders = []
+        this.friendNodes = []
         this.nodeUrl = process.env.NODE_URL
     }
 

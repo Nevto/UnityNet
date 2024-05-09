@@ -1,12 +1,13 @@
 import express from 'express'
-import { loadUnityNet } from '../controllers/unityNet-controller.mjs'
+import { createBlock, loadUnityNet, synchronizeChain, updateChain } from '../controllers/unityNet-controller.mjs'
 
 const router = express.Router()
 
-router.route('/').get(loadUnityNet, (req, res, next) => {
+router.route('/').get(loadUnityNet)
+router.route('/mine').post(createBlock)
+router.route('/sync').get(synchronizeChain)
+router.route('/update').post(updateChain)
 
-    next(error)
-})
 // router.route('/mine').post(createBlock)
 
 export default router

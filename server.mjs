@@ -17,10 +17,6 @@ global.__appdir = dirname
 if (process.env.NODE_ENV === 'development') {
     app.use(logMyData)
 }
-app.all('*', (req, res, next) => {
-    next(new Error(`Can't find ${req.originalUrl} on this server!`))
-
-})
 
 
 
@@ -29,8 +25,16 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.json())
 
-app.use('/api/v1/unity', unityRouter)
+app.use('/unity', unityRouter)
+
+
+app.all('*', (req, res, next) => {
+    next(new Error(`Can't find ${req.originalUrl} on this server!`))
+
+})
 app.use(errorHandler)
+
+
 
 app.listen(PORT, () => {
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
