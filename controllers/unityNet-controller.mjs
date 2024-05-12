@@ -6,12 +6,12 @@ export const loadUnityNet = (req, res, next) => {
 
 export const createBlock = async (req, res, next) => {
     const lastBlock = unityNet.getLastBlock()
+    const { nonce, difficulty, timestamp } = unityNet.proofOfWork(lastBlock.hash, req.body)
     const data = req.body
-    const timestamp = Date.now()
 
-    const currBlockHash = unityNet.hashBlock(timestamp, lastBlock.hash, data)
+    const currBlockHash = unityNet.hashBlock(timestamp, lastBlock.hash, data, nonce, difficulty)
 
-    const block = unityNet.createBlock(timestamp, lastBlock.hash, currBlockHash, data)
+    const block = unityNet.createBlock(timestamp, lastBlock.hash, currBlockHash, data, nonce, difficulty)
 
     const updateFriends = unityNet.friendNodes.map((url) => {
         const body = block;

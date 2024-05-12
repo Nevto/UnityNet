@@ -15,6 +15,7 @@ const dirname = path.dirname(filename)
 
 global.__appdir = dirname
 
+
 if (process.env.NODE_ENV === 'development') {
     app.use(logMyData)
 }
