@@ -1,11 +1,22 @@
 import { unityNet } from "../starter.mjs";
-import { writeFileAsync } from "../utilities/fileHandler.mjs";
+import { createUnityNetJson, readFileAsync, writeFileAsync, } from "../utilities/fileHandler.mjs";
+import { readUnityNetData } from "../utilities/readFromJson.mjs";
 
-export const loadUnityNet = (req, res, next) => {
-    res.status(200).json({ success: true, data: unityNet })
+export const loadUnityNet = async (req, res, next) => {
+    try {
+        // const newUnityNetData = await readUnityNetData()
+        // unityNet.chain = newUnityNetData;
+        res.status(200).json({ success: true, data: unityNet })
+    } catch (error) {
+        console.error('Error loading unityNet:', error.message);
+        res.status(500).json({ success: false, error: 'Failed to load unityNet' });
+    }
 }
 
+
 export const createBlock = async (req, res, next) => {
+    await updateUnityNetChain()
+
     const lastBlock = unityNet.getLastBlock()
     const { nonce, difficulty, timestamp } = unityNet.proofOfWork(lastBlock.hash, req.body)
     const data = req.body
@@ -30,17 +41,37 @@ export const createBlock = async (req, res, next) => {
     await Promise.all(updateFriends)
 
 
+
+    console.log("data to be writen", JSON.stringify(unityNet.chain));
+    await writeFileAsync('logs', 'unityNet.json', JSON.stringify(unityNet.chain, null, 2))
+
     res.status(201).json({
         success: true,
         data: { message: 'Block created and sent to all the other nodes', block }
     })
 
-    // await writeFileAsync('logs', 'unityNet.json', JSON.stringify(unityNet.chain))
+}
+
+
+const updateUnityNetChain = async () => {
+    try {
+        const newUnityNetData = await readUnityNetData()
+        // const unityNetData = await readFileAsync('logs', 'unityNet.json')
+        // const newUnityNetData = JSON.parse(unityNetData)
+        unityNet.chain = newUnityNetData;
+        console.log('Chain updated successfully.')
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            console.log('UnityNet JSON file not found. Skipping chain update.');
+            return
+        }
+    }
 }
 
 
 
 export const updateChain = (req, res, next) => {
+
     const block = req.body
     const lastBlock = unityNet.getLastBlock()
     const hash = lastBlock.hash === block.prevHash

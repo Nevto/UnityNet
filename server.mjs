@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
 import unityRouter from './routes/unityRouter.mjs'
 import friendsRouter from './routes/friendsRouter.mjs'
 import logMyData from './middleware/logger.mjs'
@@ -25,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 const PORT = process.argv[2]
 // const PORT = process.env.PORT || 5000
 // const NODE_URL = process.argv[2] || process.env.NODE_URL
-
+app.use(cors())
 app.use(express.json())
 
 app.use('/unity', unityRouter)
