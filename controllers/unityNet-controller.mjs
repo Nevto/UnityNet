@@ -14,9 +14,30 @@ export const createBlock = async (req, res, next) => {
     const block = unityNet.createBlock(timestamp, lastBlock.hash, currBlockHash, data)
 
     res.status(201).json({ success: true, data: block })
-}
 
-export const updateChain = (rec, res, next) => {
+
+}
+unityNet.friendNodes.forEach(async (url) => {
+    const body = block;
+
+    await fetch(`${url}/unity/update`, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    res.status(201).json({
+        success: true,
+        data: { message: 'Block skapat och skickat till alla noder', block }
+    })
+
+})
+
+
+
+export const updateChain = (req, res, next) => {
     const block = req.body
     const lastBlock = unityNet.getLastBlock()
     const hash = lastBlock.hash === block.prevHash
@@ -36,10 +57,10 @@ export const synchronizeChain = (req, res, next) => {
     let longestChain = null
 
     unityNet.friendNodes.forEach(async (friend) => {
-        const response = await fetch(`${friend}/api/v1/unityNet`)
+        const response = await fetch(`${friend}/unity`)
         if (response.ok) {
             const result = await response.json()
-
+            console.log(result);
             if (result.data.chain.length > maxLength) {
                 maxLength = result.data.chain.length
                 longestChain = result.data.chain

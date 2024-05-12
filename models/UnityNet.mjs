@@ -6,7 +6,7 @@ export default class UnityNet {
     constructor() {
         this.chain = []
         this.friendNodes = []
-        this.nodeUrl = process.env.NODE_URL
+        this.nodeUrl = process.argv[3]
 
         this.createBlock(Date.now(), 0, '0', '0', [])
     }
@@ -39,9 +39,9 @@ export default class UnityNet {
     validateChain(UnityNet) {
         let isValid = true
 
-        for (let i = 1; i < UnityNet.chain.length;) {
-            const block = UnityNet.chain[i]
-            const prevBlock = UnityNet.chain[i - 1]
+        for (let i = 1; i < UnityNet.length; i++) {
+            const block = UnityNet[i]
+            const prevBlock = UnityNet[i - 1]
 
             const hash = this.hashBlock(
                 block.timestamp,

@@ -6,7 +6,9 @@
   "start": "set NODE_ENV=production&& node server",
   "scripts": {
     "dev": "nodemon server",
-    "start": "node server"
+    "start": "node server",
+    "node-1": "nodemon server.mjs 5001 http://localhost:5001",
+    "node-2": "nodemon server.mjs 5002 http://localhost:5002"
   },
   "keywords": [],
   "author": "",
