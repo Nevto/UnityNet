@@ -1,4 +1,5 @@
 import { unityNet } from "../starter.mjs";
+import { writeFileAsync } from "../utilities/fileHandler.mjs";
 
 export const loadUnityNet = (req, res, next) => {
     res.status(200).json({ success: true, data: unityNet })
@@ -12,6 +13,7 @@ export const createBlock = async (req, res, next) => {
     const currBlockHash = unityNet.hashBlock(timestamp, lastBlock.hash, data, nonce, difficulty)
 
     const block = unityNet.createBlock(timestamp, lastBlock.hash, currBlockHash, data, nonce, difficulty)
+
 
     const updateFriends = unityNet.friendNodes.map((url) => {
         const body = block;
@@ -27,10 +29,13 @@ export const createBlock = async (req, res, next) => {
 
     await Promise.all(updateFriends)
 
+
     res.status(201).json({
         success: true,
         data: { message: 'Block created and sent to all the other nodes', block }
     })
+
+    // await writeFileAsync('logs', 'unityNet.json', JSON.stringify(unityNet.chain))
 }
 
 

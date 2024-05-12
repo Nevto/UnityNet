@@ -49,8 +49,8 @@ export default class UnityNet {
                 block.timestamp,
                 prevBlock.hash,
                 block.data,
-                nonce,
-                difficulty
+                block.nonce,
+                block.difficulty
             )
             if (hash !== block.hash) isValid = false
             if (block.prevHash !== prevBlock.hash) isValid = false
