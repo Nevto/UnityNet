@@ -13,27 +13,25 @@ export const createBlock = async (req, res, next) => {
 
     const block = unityNet.createBlock(timestamp, lastBlock.hash, currBlockHash, data)
 
-    res.status(201).json({ success: true, data: block })
+    const updateFriends = unityNet.friendNodes.map((url) => {
+        const body = block;
 
+        return fetch(`${url}/unity/update`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    })
 
-}
-unityNet.friendNodes.forEach(async (url) => {
-    const body = block;
-
-    await fetch(`${url}/unity/update`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    await Promise.all(updateFriends)
 
     res.status(201).json({
         success: true,
-        data: { message: 'Block skapat och skickat till alla noder', block }
+        data: { message: 'Block created and sent to all the other nodes', block }
     })
-
-})
+}
 
 
 

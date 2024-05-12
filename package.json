@@ -8,7 +8,8 @@
     "dev": "nodemon server",
     "start": "node server",
     "node-1": "nodemon server.mjs 5001 http://localhost:5001",
-    "node-2": "nodemon server.mjs 5002 http://localhost:5002"
+    "node-2": "nodemon server.mjs 5002 http://localhost:5002",
+    "node-3": "nodemon server.mjs 5003 http://localhost:5003"
   },
   "keywords": [],
   "author": "",
