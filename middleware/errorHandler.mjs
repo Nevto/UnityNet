@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
-const errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, req, res, next) => {
     const filePath = path.join(__appdir, 'logs', 'error.log')
     err.statusCode = err.statusCode || 500
     err.status = err.status || 'Something very bad happened to the server'
 
-    const message = `req: ${req.method} ${req.originalUrl} ${new Date()} ${err.message}\n`
+    const message = `req: ${req.method} ${req.originalUrl} ${new Date().toLocaleTimeString()} ${err.message}\n`;
 
     fs.appendFile(filePath, message, err => {
         if (err) {

@@ -82,6 +82,6 @@ export default class UnityNet {
 
         return timestamp - lastBlock.timestamp > MINE_RATE
             ? +difficulty - 1
-            : +difficulty + 1;
+            : +difficulty + 1
     }
 }

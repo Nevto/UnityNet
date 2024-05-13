@@ -7,6 +7,7 @@ import logMyData from './middleware/logger.mjs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import errorHandler from './middleware/errorHandler.mjs'
+import ErrorResponse from './utilities/ErrorResponseModel.mjs'
 
 dotenv.config({ path: './config/config.env' })
 const app = express()
@@ -24,8 +25,6 @@ if (process.env.NODE_ENV === 'development') {
 
 
 const PORT = process.argv[2]
-// const PORT = process.env.PORT || 5000
-// const NODE_URL = process.argv[2] || process.env.NODE_URL
 app.use(cors())
 app.use(express.json())
 
@@ -35,9 +34,9 @@ app.use('/friends', friendsRouter)
 
 
 app.all('*', (req, res, next) => {
-    next(new Error(`Can't find ${req.originalUrl} on this server!`))
-
+    next(new ErrorResponse(`Can't find ${req.originalUrl} on this server!`, 404))
 })
+
 app.use(errorHandler)
 
 

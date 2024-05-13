@@ -8,4 +8,4 @@ export const readUnityNetData = async () => {
         // Handle file read or parsing errors
         throw new Error('Failed to read UnityNet data: ' + error.message);
     }
-};
+}
