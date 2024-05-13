@@ -1,3 +1,4 @@
+import ErrorResponse from "./ErrorResponseModel.mjs";
 import { readFileAsync } from "./fileHandler.mjs";
 
 export const readUnityNetData = async () => {
@@ -5,7 +6,7 @@ export const readUnityNetData = async () => {
         const unityNetData = await readFileAsync('logs', 'unityNet.json');
         return JSON.parse(unityNetData);
     } catch (error) {
-        // Handle file read or parsing errors
-        throw new Error('Failed to read UnityNet data: ' + error.message);
+
+        throw new ErrorResponse(`Failed to read the data from the JSON file ${error.message}`, 500);
     }
 }

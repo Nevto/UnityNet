@@ -42,7 +42,7 @@ export const createBlock = async (req, res, next) => {
 
     await Promise.all(updateFriends)
 
-    await writeFileAsync('logs', 'unityNet.json', JSON.stringify(unityNet.chain, null, 2))
+    await writeFileAsync('ledger', 'unityNet.json', JSON.stringify(unityNet.chain, null, 2))
 
     const responseModel = new ResponseModel({
         statusCode: 201,

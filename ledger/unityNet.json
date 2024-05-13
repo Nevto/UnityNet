@@ -1,0 +1,67 @@
+[
+  {
+    "timestamp": 1715561854437,
+    "blockIndex": 1,
+    "prevHash": "0",
+    "hash": "0",
+    "data": [],
+    "nonce": 1666,
+    "difficulty": "2"
+  },
+  {
+    "timestamp": 1715561856745,
+    "blockIndex": 2,
+    "prevHash": "0",
+    "hash": "0395989da5309c0bb40067172864d157c0e5a0e307576a88c0e9fcc7976a9b9a",
+    "data": {
+      "productName": "PonziCoin",
+      "price": "$20",
+      "MarketCap": "$100 000",
+      "Amount of tokens": 3000
+    },
+    "nonce": 31,
+    "difficulty": 1
+  },
+  {
+    "timestamp": 1715561860573,
+    "blockIndex": 3,
+    "prevHash": "0395989da5309c0bb40067172864d157c0e5a0e307576a88c0e9fcc7976a9b9a",
+    "hash": "7ef536c86bde457aceb5b7767af9fd58f2cc5261d83e641e645ab14da1d669ba",
+    "data": {
+      "productName": "PonziCoin",
+      "price": "$20",
+      "MarketCap": "$100 000",
+      "Amount of tokens": 3000
+    },
+    "nonce": 1,
+    "difficulty": 0
+  },
+  {
+    "timestamp": 1715561861172,
+    "blockIndex": 4,
+    "prevHash": "7ef536c86bde457aceb5b7767af9fd58f2cc5261d83e641e645ab14da1d669ba",
+    "hash": "0aaa77ba0b8f4d852cb2d989ddc947cec40b7af8665dec9ab9f867e854379a6e",
+    "data": {
+      "productName": "PonziCoin",
+      "price": "$20",
+      "MarketCap": "$100 000",
+      "Amount of tokens": 3000
+    },
+    "nonce": 10,
+    "difficulty": 1
+  },
+  {
+    "timestamp": 1715561861731,
+    "blockIndex": 5,
+    "prevHash": "0aaa77ba0b8f4d852cb2d989ddc947cec40b7af8665dec9ab9f867e854379a6e",
+    "hash": "001d040c2e751466f9b3a3da6142dcce416f547249c9b237fd072df21c2b3495",
+    "data": {
+      "productName": "PonziCoin",
+      "price": "$20",
+      "MarketCap": "$100 000",
+      "Amount of tokens": 3000
+    },
+    "nonce": 77,
+    "difficulty": 2
+  }
+]
